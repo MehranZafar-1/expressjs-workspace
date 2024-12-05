@@ -17,7 +17,7 @@ const app = express();
 // ALL - Any HTTP Request Method
 
 
-// Basic Routing
+// Basic Routing --------------------
 // app.get('/', (req, res) => {
 //     res.send('Home');
 // });
@@ -31,13 +31,13 @@ const app = express();
 // });
 
 
-// String Pattern Path
+// String Pattern Path --------------------
 // app.get("/ab?cd", (req, res) => {
 //     res.send("If the user hit (acd) or (abcd) then this will run");
 // });
 
 
-// Regex - Regular Expression
+// Regex - Regular Expression --------------------
 // app.get(/x/, (req, res) => {
 //     res.send("If the path includes the letter (x) it will work. ");
 // });
@@ -48,19 +48,19 @@ const app = express();
 // })
 
 
-// Nested Routes
+// Nested Routes --------------------
 // app.get('/products/iphone', (req, res) => {
 //    res.send("This will only work if you provide /products/iphone"); 
 // });
 
 
-// Single callback
+// Single callback --------------------
 // app.get('/single-cb', (req, res) => {
 //     res.send('Single Callback');
 // });
 
 
-// Double callback using next
+// Double callback using next --------------------
 // app.get(
 //     '/double-cb', 
 //     (req, res, next) => {
@@ -73,7 +73,7 @@ const app = express();
 // );
 
 
-// array of call back
+// array of call back --------------------
 // const cb1 = (req, res, next) => {
 //     console.log('First Callback');
 //     next();
@@ -89,7 +89,7 @@ const app = express();
 //app.get("/array-cb", [cb1, cb2, cb3]);
 
 
-// Mix of all
+// Mix of all --------------------
 // const cb1 = (req, res, next) => {
 //     console.log('First Callback');
 //     next();
@@ -107,6 +107,45 @@ const app = express();
 // });
 
 
+// Refactoring Code --------------------
+// Before
+// app.get('/student', (req, res) => {
+//     res.send('All Students');
+// })
+// app.post('/student', (req, res) => {
+//     res.send('Add New Student');
+// })
+// app.put('/student', (req, res) => {
+//     res.send('Update Students');
+// })
+// app.delete('/student', (req, res) => {
+//     res.send('Delete Students');
+// })
+//
+// After
+// app.route('/student').get((req, res) => {
+//     res.send('All Students');
+// }).post((req, res) => {
+//     res.send('Add New Student');
+// }).put((req, res) => {
+//     res.send('Update Student');
+// }).delete((req, res) => {
+//     res.send('Delete Students');
+// });
+
+
+// 1. Create routes folder and put routes in separate file
+// 2. Create instance of express.Router()
+// 3. Instead of app.method change to router.method
+// 4. Export router
+// 5. Import router 
+// 6. use (app.use) built-in middleware and provide your routers
+
+import students from './routes/student.js';
+import teachers from './routes/teacher.js';
+
+app.use('/students', students);
+app.use('/teachers', teachers);
 
 
 app.listen(8000, () => {
