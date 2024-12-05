@@ -134,6 +134,7 @@ const app = express();
 // });
 
 
+// Using Router --------------------
 // 1. Create routes folder and put routes in separate file
 // 2. Create instance of express.Router()
 // 3. Instead of app.method change to router.method
@@ -141,12 +142,33 @@ const app = express();
 // 5. Import router 
 // 6. use (app.use) built-in middleware and provide your routers
 
-import students from './routes/student.js';
-import teachers from './routes/teacher.js';
+// import students from './routes/student.js';
+// import teachers from './routes/teacher.js';
 
-app.use('/students', students);
-app.use('/teachers', teachers);
+// app.use('/students', students);
+// app.use('/teachers', teachers);
 
+// Route Params - values specified in the url
+// (/:) is used for route params
+// stored in req.params
+// app.get('/student/delete/:id', (req, res) => {
+//     const {model} = req.params;
+//     res.send("Delete Student " + req.params.id);
+// })
+// //multiple parameters
+// app.get('/student/update/:id/:email', (req, res) => { 
+//     const {id, email} = req.params;
+//     res.send("Update Student " + req.params.id + " with email " + req.params.email);
+// })
+// // separate function of app for parameters
+// app.param('id', (req, res, next, id) => {
+//     console.log(id);
+//     next();
+// });
+
+app.get('/student/:id', (req, res) => {
+    res.send("This is student id path");
+})
 
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
