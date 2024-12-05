@@ -165,10 +165,16 @@ const app = express();
 //     console.log(id);
 //     next();
 // });
+// app.get('/student/:id', (req, res) => {
+//     res.send("This is student id path");
+// })
 
-app.get('/student/:id', (req, res) => {
-    res.send("This is student id path");
-})
+
+// Controllers - functions that handle requests ---------------------------------------------------------------------------------------------------
+import students from './routes/student.js';
+
+app.use('/students', students);
+
 
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
