@@ -179,11 +179,18 @@ const app = express();
 // Query String (?) ---------------------------------------------------------------
 // send data from client to server 
 // separate with & and specify with =
-app.get('/product', (req, res) => {
-    //res.send('Response OK ' + req.query.category)
-    const {category, id} = req.query;
-    res.send('Category: ' + category + " id: " + id);
+// app.get('/product', (req, res) => {
+//     //res.send('Response OK ' + req.query.category)
+//     const {category, id} = req.query;
+//     res.send('Category: ' + category + " id: " + id);
+// })
+
+// Sending Data from backend to frontend -------------------------------------------------------------------------------------------------------------
+import products from './products.js';
+app.get('/', (req, res) => {
+    res.json(products);
 })
+
 
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
