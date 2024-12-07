@@ -185,12 +185,21 @@ const app = express();
 //     res.send('Category: ' + category + " id: " + id);
 // })
 
-// Sending Data from backend to frontend -------------------------------------------------------------------------------------------------------------
-import products from './products.js';
-app.get('/', (req, res) => {
-    res.json(products);
-})
+// Sending Data from backend to client -------------------------------------------------------------------------------------------------------------
+// import products from './products.js';
+// app.get('/', (req, res) => {
+//     res.json(products);
+// })
 
+// Middleware - performs function --------------------------------------------------------------------
+import userCredentials from './middleware/logs.js';
+app.use(userCredentials); // allows to use middleware for multiple routes
+app.get('/', userCredentials, (req, res) => {
+  res.send('Hello Admin');
+});
+app.get('/about', userCredentials, (req, res) => {
+    res.send('Hello Admin');
+  });
 
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
