@@ -4,7 +4,7 @@
 // Create Instance express
 // Provide Port
 // Basic Route /
-import express from 'express';
+import express, { query } from 'express';
 
 const app = express();
 
@@ -171,10 +171,19 @@ const app = express();
 
 
 // Controllers - functions that handle requests ---------------------------------------------------------------------------------------------------
-import students from './routes/student.js';
+// import students from './routes/student.js';
 
-app.use('/students', students);
+// app.use('/students', students);
 
+
+// Query String (?) ---------------------------------------------------------------
+// send data from client to server 
+// separate with & and specify with =
+app.get('/product', (req, res) => {
+    //res.send('Response OK ' + req.query.category)
+    const {category, id} = req.query;
+    res.send('Category: ' + category + " id: " + id);
+})
 
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
