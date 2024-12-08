@@ -202,13 +202,21 @@ const app = express();
 //   });
 
 // Serving Static Files ---------------------------------------------------------------------------------------------
-import path from 'path';
+// import path from 'path';
 
-app.use(express.static('./public'));
+// app.use(express.static('./public'));
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(path.join(process.cwd(), './public/index.html')));
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(path.resolve(path.join(process.cwd(), './public/index.html')));
+// });
+
+// Template Engines ----------------------------------------------------------------------------------------------------------------------
+import {join} from 'path';
+import route from './routes/route.js';
+
+app.set('view engine', 'ejs');
+app.use('/', route);
+
 
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
