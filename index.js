@@ -192,14 +192,23 @@ const app = express();
 // })
 
 // Middleware - performs function --------------------------------------------------------------------
-import userCredentials from './middleware/logs.js';
-app.use(userCredentials); // allows to use middleware for multiple routes
-app.get('/', userCredentials, (req, res) => {
-  res.send('Hello Admin');
+// import userCredentials from './middleware/logs.js';
+// app.use(userCredentials); // allows to use middleware for multiple routes
+// app.get('/', userCredentials, (req, res) => {
+//   res.send('Hello Admin');
+// });
+// app.get('/about', userCredentials, (req, res) => {
+//     res.send('Hello Admin');
+//   });
+
+// Serving Static Files ---------------------------------------------------------------------------------------------
+import path from 'path';
+
+app.use(express.static('./public'));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.resolve(path.join(process.cwd(), './public/index.html')));
 });
-app.get('/about', userCredentials, (req, res) => {
-    res.send('Hello Admin');
-  });
 
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
